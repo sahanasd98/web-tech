@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class BasicJavaExample {
+
+    public static void main(String[] args) {
+        // Print a welcome message
+        System.out.println("Welcome to Basic Java Program!");
+
+        // Create Scanner object for input
+        Scanner scanner = new Scanner(System.in);
+
+        // Take user input
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter first number: ");
+        int num1 = scanner.nextInt();
+
+        System.out.print("Enter second number: ");
+        int num2 = scanner.nextInt();
+
+        // Perform basic arithmetic
+        int sum = num1 + num2;
+        int product = num1 * num2;
+
+        // Display results
+        System.out.println("\nHello, " + name + "!");
+        System.out.println("Sum = " + sum);
+        System.out.println("Product = " + product);
+
+        // Close scanner
+        scanner.close();
+    }
+}
