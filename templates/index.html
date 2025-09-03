@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Transaction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>💰 ATM Transaction System</h1>
+    <h2>Balance: ${{ balance }}</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <input type="number" step="0.01" name="amount" placeholder="Enter amount" required>
+      <button type="submit" name="action" value="Deposit">Deposit</button>
+      <button type="submit" name="action" value="Withdraw">Withdraw</button>
+    </form>
+
+    <h3>Transaction History:</h3>
+    <ul>
+      {% for t in transactions %}
+        <li>{{ t }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

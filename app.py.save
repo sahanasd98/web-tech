@@ -1,0 +1,67 @@
+from flask import Flask, render_template, request, redirect, url_for, flash
+
+app = Flask(__name__)
+app.secret_key = "atm_secret_key"
+
+# Simulate user account
+account = {"balance": 1000, "transactions": []}
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        action = request.form["action"]
+        amount = request.form.get("amount")
+        if amount:
+            amount = float(amount)
+        
+        if action == "Deposit":
+            account["balance"] += amount
+            account["transactions"].append(f"Deposited ${amount}")
+            flash(f"Deposited ${amount} successfully!", "success")
+        elif action == "Withdraw":
+            if amount > account["balance"]:
+                flash("Insufficient balance!", "error")
+            else:
+                account["balance"] -= amount
+                account["transactions"].append(f"Withdrew ${amount}")
+                flash(f"Withdrew ${amount} successfully!", "success")
+        return redirect(url_for("home"))
+
+    return render_template("index.html", balance=account["balance"], transactions=account["transactions"])
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
+from flask import Flask, render_template, request, redirect, url_for, flash
+
+app = Flask(__name__)
+app.secret_key = "atm_secret_key"
+
+# Simulate user account
+account = {"balance": 1000, "transactions": []}
+
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        action = request.form["action"]
+        amount = request.form.get("amount")
+        if amount:
+            amount = float(amount)
+        
+        if action == "Deposit":
+            account["balance"] += amount
+            account["transactions"].append(f"Deposited ${amount}")
+            flash(f"Deposited ${amount} successfully!", "success")
+        elif action == "Withdraw":
+            if amount > account["balance"]:
+                flash("Insufficient balance!", "error")
+            else:
+                account["balance"] -= amount
+                account["transactions"].append(f"Withdrew ${amount}")
+                flash(f"Withdrew ${amount} successfully!", "success")
+        return redirect(url_for("home"))
+
+    return render_template("index.html", balance=account["balance"], transactions=account["transactions"])
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
